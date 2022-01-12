@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test name="Test(failed)">
+    <groups>
+      <run>
+        <exclude name="sanity"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.ecommerce.stepdefinition.Flipkart">
+        <methods>
+          <include name="choose"/>
+          <include name="launch"/>
+          <include name="end"/>
+          <include name="quit"/>
+          <include name="start"/>
+        </methods>
+      </class> <!-- com.ecommerce.stepdefinition.Flipkart -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->
