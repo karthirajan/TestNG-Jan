@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite">
+<suite name="Suite" parallel="classes" thread-count="2">
   <test name="Test">
     <parameter name="username" value="java"/>
     <parameter name="password" value="selenium"/>
-    <groups>
-      <run>
-         <exclude name="sanity"></exclude>
-      </run>
-    </groups>
     <classes>
       <class name="com.ecommerce.stepdefinition.Flipkart"/>
       <class name="com.ecommerce.stepdefinition.Amazon"/>
+      <class name="com.ecommerce.stepdefinition.FlipkartTv"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

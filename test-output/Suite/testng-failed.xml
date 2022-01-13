@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <listeners>
+    <listener class-name="com.ecommerce.stepdefinition.Transform"/>
+  </listeners>
   <test name="Test(failed)">
-    <groups>
-      <run>
-        <exclude name="sanity"/>
-      </run>
-    </groups>
     <classes>
-      <class name="com.ecommerce.stepdefinition.Flipkart">
+      <class name="com.ecommerce.stepdefinition.AmazonTv">
         <methods>
-          <include name="choose"/>
-          <include name="launch"/>
-          <include name="end"/>
-          <include name="quit"/>
+          <include name="searchMobile"/>
           <include name="start"/>
+          <include name="end"/>
+          <include name="launch"/>
+          <include name="quit"/>
         </methods>
-      </class> <!-- com.ecommerce.stepdefinition.Flipkart -->
+      </class> <!-- com.ecommerce.stepdefinition.AmazonTv -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

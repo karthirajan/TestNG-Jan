@@ -17,18 +17,20 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Flipkart {
+public class FlipkartTv {
 	
 	
 	@DataProvider(name="mobileName")
@@ -48,15 +50,25 @@ public class Flipkart {
 	static WebDriver driver;
 	static long startTime;
 	
+	@Parameters("browser")
 	@BeforeClass(groups="default")
-    public static void launch() {
+    public static void launch(String browser) {
 		
-		WebDriverManager.chromedriver().setup();
-	    driver = new ChromeDriver();
-	    driver.get("https://www.flipkart.com/");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-		driver.navigate().refresh();
+		if(browser.equals("chrome")){
+			WebDriverManager.chromedriver().setup();
+		    driver = new ChromeDriver();
+		    driver.get("https://www.amazon.com/");
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
+			driver.navigate().refresh();
+			}else{
+				WebDriverManager.edgedriver().setup();
+				driver = new EdgeDriver();
+				driver.get("https://www.amazon.com/");
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				driver.navigate().refresh();
+			}
 		
 
 	}
@@ -106,61 +118,19 @@ public class Flipkart {
 	public void Search(String name) {
 		
 		WebElement search = driver.findElement(By.name("q"));
-		search.sendKeys(name,Keys.ENTER);
+		search.sendKeys("samsung tv",Keys.ENTER);
 
 	}
 	
 	static String name;
 	
 	
-	@Test(priority = 2,retryAnalyzer=Rerun.class)
-	public void choose() {
-		
-		WebElement mobile = driver.findElement(By.xpath("(/div[contains(text(),'realme')])[2]"));
-		String text = mobile.getText();
-
-		name = text;
-		System.out.println(name);
-		
-		mobile.click();
-		
-	}
 	
-	@Test(priority = 3,groups="sanity")
-	public void window() {
-		
-		String par = driver.getWindowHandle();
-		Set<String> child = driver.getWindowHandles();
-		
-		for(String x : child) {
-			if(!par.equals(x)) {
-				System.out.println("tab switched");
-				driver.switchTo().window(x);
-			}
-		}
-
-	}
 	
-	@Test(priority = 4,enabled = true,groups="sanity")
-	public void validation() {
-		
-		WebElement newMobile = driver.findElement(By.xpath("//span[contains(text(),'realme')]"));
-		String last = newMobile.getText();
-		System.out.println(last);
-	//	Assert.assertEquals(name, last);
-		
-		SoftAssert s = new SoftAssert();
-		
-		s.assertEquals(name, last);
-		
-		System.out.println("matched");
-
-	}
-	
-	@Test(priority = 5,invocationCount = 3,groups="sanity")
+	@Test(priority = 2,groups="sanity")
 	public void screenshot() throws IOException, InterruptedException {
 		
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		
 		SimpleDateFormat sec = new SimpleDateFormat("ss");
 		String date = sec.format(new Date(0));

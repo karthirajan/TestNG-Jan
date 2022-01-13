@@ -16,30 +16,23 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Amazon {
-
+public class AmazonTv {
+	
 	static WebDriver driver;
 	static long startTime;
 	
-	@Parameters("browser")
+
 	@BeforeClass(groups="default")
-    public static void launch(String browser) {
+    public static void launch() {
 		
-		if(browser.equals("chrome")){
+		
 		WebDriverManager.chromedriver().setup();
 	    driver = new ChromeDriver();
 	    driver.get("https://www.amazon.com/");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-		driver.navigate().refresh();
-		}else{
-			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver();
-			driver.get("https://www.amazon.com/");
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			driver.manage().window().maximize();
-			driver.navigate().refresh();
-		}
+		
+		
 
 	}
 	
@@ -65,12 +58,13 @@ public class Amazon {
 
 	}
 	
+//	@Test(groups="searchFunctionality",retryAnalyzer=Rerun.class)
 	@Test(groups="searchFunctionality")
 	public void searchMobile() {
 		
-		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("mobiles",Keys.ENTER);
+		driver.findElement(By.id("twotabsearchtextboxes")).sendKeys("mobiles",Keys.ENTER);
 		
 
 	}
-	
+
 }
